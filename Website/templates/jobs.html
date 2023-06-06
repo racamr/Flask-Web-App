@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{%block content%}
+    
+    <div class="container">
+        <div class="text-center my-4"><h4>Available Positions</h4></div>
+        {% for item in data%}
+        {% if item.location%}
+        <div class="row" style="border: 1px solid lightgray; padding:20px; margin-bottom: 20px">
+            <div class="col-9">
+            <h5>Vacancy available at</h5>{{item['compname']}}
+            
+            <h5>Location: </h5>{{item['location']}}
+            
+            <h5>Sector: </h5>{{item['sector']}}
+            <br>
+            <h5>Duration of the job:</h5> {{item['service_period']}}
+            <br>
+            <h5>Category: </h5> {{item['category']}}
+            <br>
+            <h5>Job Description</h5> {{item['job_description']}}
+            <br>
+            </div> 
+
+            <div class="col-3 align-self-center">
+              <a href="userlogin" class="btn btn-outline-primary" role="button">Apply</a>
+             </div>
+        </div>
+           
+         {% endif%}
+         
+        {% endfor%}
+    </div>
+    <div class="class mt-2"></div>
+        
+    
+    
+
+{%endblock content%}

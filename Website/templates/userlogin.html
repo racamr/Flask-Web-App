@@ -1,0 +1,70 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="container">
+    {% with messages = get_flashed_messages()%}
+          {% if messages%}
+            <div class="alert alert-primary d-flex align-items-center" role="alert" >
+              <div class="flex-grow-1">
+              {% for message in messages %}
+              {{ message}}
+              {% endfor%} </div>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endif%}
+        {% endwith%}
+</div>
+
+<div class="container w-50">
+<form method="POST">
+    <div class="class" style="border: 1px solid lightgray; padding:20px; margin-top :30px">
+    {{form.hidden_tag()}}
+    <fieldset>
+        <legend class=" my-2" >Finder:  User Login</legend>
+        
+
+        <div class="form-group mb-3">
+            {{form.email.label(class="form-control-label")}}
+            {%if form.email.errors%}
+            {{form.email(class="form-control form-control-lg-invalid")}}
+            {%for error in form.email.errors%}
+            <span>{{error}}</span>
+            {%endfor%}
+            {%else%}
+            {{form.email(class="form-control form-control-lg")}}
+            {%endif%}
+            
+        </div>
+
+        <div class="form-group mb-3">
+            {{form.password.label(class="form-control-label")}}
+            {%if form.password.errors%}
+            {{form.password(class="form-control form-control-lg-invalid")}}
+            {%for error in form.password.errors%}
+            <span>{{error}}</span>
+            {%endfor%}
+            {%else%}
+            {{form.password(class="form-control form-control-lg")}}
+            {%endif%}
+            
+        </div>
+
+        
+    </fieldset>
+<div class="form-group">
+    {{form.submit(class="btn btn-primary")}}
+    
+</div> <br>
+<div class="class">New User? Signup
+    <a href="{{url_for('usersignup')}}" class="" style="text-decoration: none;">here</a>
+</div>
+ 
+<div class="class my-3">
+    <a href="" class="" style="text-decoration: none;">Forgot Password</a>
+</div>
+
+</div>
+</form>
+</div>
+{%endblock content%}
