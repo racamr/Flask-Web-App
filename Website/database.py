@@ -30,7 +30,7 @@ database_connection = mysql.connector.connect(host="aws.connect.psdb.cloud",
 cursor = database_connection.cursor()
 
 #execute query
-cursor.execute("select * from userlogin")
+cursor.execute("select * from user")
 
 #fetch all matching rows
 result = cursor.fetchall()
