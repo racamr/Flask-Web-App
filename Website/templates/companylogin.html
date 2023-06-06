@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {%extends 'base.html'%}
 
 {%block content%}
@@ -70,3 +71,24 @@
 </form>
 </div>
 {%endblock content%}
+=======
+{% extends "base.html" %} {% block title%}Company Log In{% endblock %}
+
+{% block content%} 
+<form action="" method="POST">
+    <h3 align="center" >Company Login</h3>
+    <div class="form-group mb-2">
+        <label for="email" >Email</label>
+        <input type="email" class="form-control" name="companyemail" id="companyemail" placeholder="Enter Email">
+    </div>
+    <div class="form-group">
+        <label for="password" >Password</label>
+        <input type="password" class="form-control" name="companypassword" id="companypassword" placeholder="Enter password">
+    </div>
+    <br />
+    <button type="submit"  class="btn btn-primary">Login</button>
+
+</form>
+
+{% endblock %}
+>>>>>>> 2bbab9b15ac61ebce6bb8f2ab18df4e576c9ecd1
