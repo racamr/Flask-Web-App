@@ -1,7 +1,11 @@
-# File to run when we want to start the web server
+#file that runs the app
+from flask import Flask
+from Website import app
 
-from Website import create_app
 
-app = create_app()
-if __name__ == '__main__':
-    app.run( debug=True)
+
+
+
+if __name__=='__main__':
+    app.run(debug=True)
+    
