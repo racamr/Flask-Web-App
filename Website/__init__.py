@@ -1,12 +1,14 @@
-
-
+import tempfile
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+import os
+from sqlalchemy import create_engine
+from flask_login import LoginManager
+from datetime import datetime
+
 from os import path
+from Website import routes
 
-
-db = SQLAlchemy()
-Database_Name = "database.db"
 
 
 def create_app():
@@ -15,28 +17,26 @@ def create_app():
         app.secret_key = 'secret key'
         
         #database location
-        #app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{Database_Name}'
+        
         app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:5432/User'
         #initialize database
         db.init_app(app)
-    
-    
-        #registering blueprints
-        from .views import views
-        from .auth import auth
-        
-        #Registering blueprints
-        app.register_blueprint(views, url_prefix='/')
-        app.register_blueprint(auth, url_prefix='/')
-        
-        #from .database import User
-        
-        #create_database(app)
 
         return app
 
-def create_database(app):
-        if not path.exists(f'Website/{Database_Name}'):
-                db.create_all(app=app)
-                print('Database created')
+app = Flask(__name__)
+
+db=SQLAlchemy(app)
+app.app_context().push()
+
+with app.app_context():
+    db.create_all()
+
+#Flask login Manager
+login_manager = LoginManager(app)
+login_manager.init_app(app)
+
+
+
+
     
