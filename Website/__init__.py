@@ -6,25 +6,28 @@ from sqlalchemy import create_engine
 from flask_login import LoginManager
 from datetime import datetime
 
-from os import path
-from Website import routes
 
 
 
-def create_app():
-        app = Flask(__name__)
-        app.config['SECRET KEY'] = 'secret key'
-        app.secret_key = 'secret key'
+
+# def create_app():
+#         app = Flask(__name__)
+#         app.config['SECRET KEY'] = 'secret key'
+#         app.secret_key = 'secret key'
         
-        #database location
+#         #database location
         
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:5432/User'
-        #initialize database
-        db.init_app(app)
+#         app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:5432/User'
+#         #initialize database
+#         db.init_app(app)
 
-        return app
+#         return app
 
 app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:5432/User'
+
+app.config['SECRET_KEY'] = 'secret_key'
 
 db=SQLAlchemy(app)
 app.app_context().push()
