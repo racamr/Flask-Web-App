@@ -1,45 +1,17 @@
-import tempfile
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-import os
-from sqlalchemy import create_engine
 from flask_login import LoginManager
-from datetime import datetime
-
-
-
-
-
-# def create_app():
-#         app = Flask(__name__)
-#         app.config['SECRET KEY'] = 'secret key'
-#         app.secret_key = 'secret key'
-        
-#         #database location
-        
-#         app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:5432/User'
-#         #initialize database
-#         db.init_app(app)
-
-#         return app
+from flask_pymongo import PyMongo
+import secrets
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:5432/User'
+app.config['SECRET_KEY'] = secrets.token_hex(16)
 
-app.config['SECRET_KEY'] = 'secret_key'
+app.config['MONGO_URI'] = "mongodb+srv://rachelamruthaluri2:gD2ljliEiPLCOY5F@racamrger.d0qawht.mongodb.net/Matchmaker?retryWrites=true&w=majority"
 
-db=SQLAlchemy(app)
-app.app_context().push()
+# Initialize the MongoDB database
+mongo = PyMongo(app)
 
-with app.app_context():
-    db.create_all()
-
-#Flask login Manager
+# Flask Login Manager
 login_manager = LoginManager(app)
 login_manager.init_app(app)
-
-
-
-
-    

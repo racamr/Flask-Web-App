@@ -1,0 +1,8 @@
+flask
+flask-login
+flask-wtf
+email_validator
+flask-sqlalchemy
+postgres
+pymongo
+flask_pymongo
