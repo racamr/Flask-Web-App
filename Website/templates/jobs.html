@@ -33,7 +33,20 @@
     </div>
     <div class="class mt-2"></div>
         
-    
+    <!--Custom JS=> main.js-->
+    <script src="{{url_for('static', filename='main.js')}}"></script>
+    <div class="chat-container">
+      <div class="chat-header">
+          Need Help?
+      </div>
+      <div class="chat-body">
+          <div id="chat-log"></div>
+          <form>
+              <input type="text" id="user-message" placeholder="Enter your message" autocomplete="off">
+              <input type="submit" value="Send" class="send-button">
+          </form>
+      </div>
+    </div>
     
 
 {%endblock content%}
