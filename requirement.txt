@@ -6,3 +6,4 @@ flask-sqlalchemy
 postgres
 pymongo
 flask_pymongo
+stripe

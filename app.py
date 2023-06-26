@@ -7,6 +7,7 @@ from Website.forms import Companyloginform, Companysignupform, Userloginform, Us
 from Website.models import User, Company, Upload, Upload1, Companydashb
 from Website import app, mongo, login_manager
 import random
+import stripe
 
 # Homepage
 @app.route("/")
@@ -188,6 +189,63 @@ def companydashboard():
         mongo.db.Matchmaker.companydashb.insert_one(companydashb)
         flash('Posted successfully', category='success')
     return render_template('companydashboard.html', title='Dashboard')
+
+
+#Stripe Payment
+stripe.api_key = 'sk_test_51NMnCbFYkG4STZrMg8isctViW38wCtJOdg9ZM19oUfhwF1Y1h8kkWvqq9HKDZcTp50flokYeIr6znlqtq0zlCiXF00QmNXMNyw'
+
+public_key = "pk_test_51NMnCbFYkG4STZrMKNIU7s4TKifXochk0KmITYtC7jB2dIjaEwmnD4hXtQ7HOfpKwVSy5fmt3Bw6lHCwZnaUeL3X00hwWlCtYr"
+
+#User payment
+@app.route("/payment")
+def payment():
+    return render_template("payment.html", public_key=public_key, title='Payment')
+
+@app.route('/thankyou')
+def thankyou():
+    return render_template('thankyou.html')
+
+@app.route('/paynow', methods=['POST'])
+def paynow():
+    
+    #customer
+    customer = stripe.Customer.create(email=request.form['stripeEmail'], source=request.form['stripeToken'])
+    
+    #payment info
+    charge = stripe.Charge.create(
+        customer=customer.id, 
+        amount=2500,
+        currency='eur',
+        description='SignUp Fee'
+    )
+    return render_template('thankyou.html')
+
+
+#Company payment
+@app.route("/companypayment")
+def companypayment():
+    return render_template("companypayment.html", public_key=public_key, title='Payment')
+
+@app.route('/companythankyou')
+def companythankyou():
+    return render_template('companythankyou.html')
+
+@app.route('/companypaynow', methods=['POST'])
+def companypaynow():
+    
+    #customer
+    customer = stripe.Customer.create(email=request.form['stripeEmail'], source=request.form['stripeToken'])
+    
+    #payment info
+    charge = stripe.Charge.create(
+        customer=customer.id, 
+        amount=2500,
+        currency='eur',
+        description='SignUp Fee'
+    )
+    return render_template('companythankyou.html')
+
+
 
 # Responses provided by the chatbot
 chatbot_responses = {
