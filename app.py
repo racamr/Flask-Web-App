@@ -336,7 +336,6 @@ def get_chatbot_response(user_message):
         return random.choice(['Workplace communication and effective communication skills are important. How can I assist you in improving workplace communication?', 'Sure, workplace communication and effective communication skills are crucial. Let me know the specific area you need assistance with.'])
     elif any(keyword in user_message for keyword in ['job interview', 'interview tips']):
         return random.choice(['Job interviews are crucial. Can you provide more information about the specific job role and the interview stage?', 'Sure, job interviews require preparation. Let me know the details about the specific job role and the interview stage for better guidance.'])
-    # Add more rule-based matching below
 
     # Machine learning responses
     ml_responses = [
