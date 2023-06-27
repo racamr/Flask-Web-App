@@ -37,12 +37,12 @@
             <div class="header">
                 <h1>SignUp Fee</h1>
             </div>
-            <form action="{{ url_for('paynow') }}" method="POST">
+            <form action="{{ url_for('companypaynow') }}" method="POST">
                 <script
                 src='https://checkout.stripe.com/checkout.js'
                 class='stripe-button'
                 data-key="{{ public_key }}"
-                data-amount='2500'
+                data-amount='5000'
                 data-currency='eur'
                 data-name='Matchmaker SignUp Fee'
                 data-description=''

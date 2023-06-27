@@ -239,7 +239,7 @@ def companypaynow():
     #payment info
     charge = stripe.Charge.create(
         customer=customer.id, 
-        amount=2500,
+        amount=5000,
         currency='eur',
         description='SignUp Fee'
     )
