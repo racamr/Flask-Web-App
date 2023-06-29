@@ -9,7 +9,7 @@
 }
 
 .chat-header {
-    background-color: #f1f1f1;
+    background-color: cadetblue;
     padding: 10px;
     cursor: pointer;
 }
@@ -46,16 +46,13 @@
 
 .send-button {
     width: 20%;
+    background-color: cadetblue;
 }
-
 
 .background-image {
     display: flex;
-    
-    
     max-width: 100%;
     max-height: 100%;
     width: auto;
     height: auto;
-
 }
