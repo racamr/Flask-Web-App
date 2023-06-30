@@ -23,12 +23,10 @@
           </div>
 
         </div>
-        {%if current_user.is_authenticated%}
-          <div>
+
+        <div>
           <a class="btn btn-outline-danger" href={{url_for('logout')}} type="submit">Logout</a>
-          </div>
-          
-          {%endif %}
+        </div>
         
         </div>
       </div>

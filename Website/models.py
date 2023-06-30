@@ -46,11 +46,13 @@ class Upload1:
         return f'{self.user_id} : {self.location} : {self.sector} : {self.service_period} : {self.category}'
 
 class Company(UserMixin):
-    def _init_(self, name, email, password, date_created):
-        self.name = name
-        self.email = email
-        self.password = password
-        self.date_created = date_created
+    #def _init_(self, name, email, password, date_created):
+    def __init__(self, company_data): 
+        self.id = str(company_data['_id']) 
+        self.name = company_data['name']
+        self.email = company_data['email']
+        self.password = company_data['password']
+        #self.datetime = company_data['datetime']
 
     def _repr_(self):
         return f'{self.name} : {self.email} : {self.date_created.strftime("%d/%m/%Y, %H:%M:%S")}'
@@ -68,6 +70,18 @@ class Companydashb:
     def _repr_(self):
         return f'{self.compname} : {self.location} : {self.sector} : {self.service_period} : {self.category}'
     
+    def get_id(self): 
+        return self.id 
+    
+    def is_authenticated(self): 
+        return True
+    
+    def is_active(self): 
+        return True
+    
+    def is_anonymous(self): 
+        return False
+    
 class User(UserMixin): 
     def __init__(self, user_data): 
         self.id = str(user_data['_id']) 
@@ -83,6 +97,13 @@ class User(UserMixin):
     
     def is_authenticated(self): 
         return True
+    
+    def is_active(self): 
+        return True
+    
+    def is_anonymous(self): 
+        return False
+    
 
 # @login_manager.unauthorized_handler
 # def unauthorized():

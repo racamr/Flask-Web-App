@@ -8,6 +8,7 @@ from Website.models import User, Company, Upload, Upload1, Companydashb
 from Website import app, mongo, login_manager
 import random
 import stripe
+import uuid
 
 # Homepage
 @app.route("/")
@@ -24,17 +25,19 @@ def about():
 @app.route('/jobs')
 def jobs():
     data = mongo.db.Matchmaker.Companydashb.find()
-    result = []
-    for document in data:
-        result.append({
-            'compname': document['compname'],
-            'location': document['location'],
-            'sector': document['sector'],
-            'service_period': document['service_period'],
-            'category': document['category'],
-            'job_description': document['job_description']
-        })
-    return render_template('jobs.html', title='Available Jobs', data=data)
+    job = []
+    for item in data:
+        item_dict = {
+            'compname': item['compname'],
+            'location': item['location'],
+            'sector': item['sector'],
+            'service_period': item['service_period'],
+            'category': item['category'],
+            'job_description': item['job_description']
+        }
+
+        job.append(item_dict)
+    return render_template('jobs.html', title='Available Jobs', data=job)
 
 # Get the base directory of the Flask app
 base_dir = app.root_path
@@ -49,32 +52,46 @@ def userlogin():
         return redirect(url_for('apply_for_jobs'))
     form = Userloginform()
     if form.validate_on_submit():
-        user = mongo.db.Matchmaker.users.find_one({'email': form.email.data})
-        if user and form.password.data == user['password']:
+        user_db = mongo.db.User.find_one({'email': form.email.data})
+        user = User(user_db)
+        if user and form.password.data == user.password:
             login_user(user)
+            
             return redirect(url_for('apply_for_jobs'))
+
         else:
             flash('Login unsuccessful', category='danger')
     return render_template('userlogin.html', title='User Login', form=form)
+
+def generate_user_id():
+    return str(uuid.uuid4())
 
 # User signup route
 @app.route('/usersignup', methods=['POST', 'GET'])
 def usersignup():
     form = Usersignupform()
     if form.validate_on_submit():
+        
         user = {
+            '_id': generate_user_id(),
             'name': form.name.data,
             'email': form.email.data,
-            'password': form.password.data
+            'password': form.password.data,
+            'datetime': "2023-06-30",
+         #   'is_active': True
         }
-        mongo.db.Matchmaker.users.insert_one(user)
+    
+        user_details = User(user)
+
+        #mongo.db.User.insert_one({"name":user_details.name, "email":user_details.email, "password": user_details.password, "datetime":user_details.datetime, "is_active":user_details.is_active})
+        mongo.db.User.insert_one(user_details.__dict__)
         flash('Account created successfully. Please Login', category='success')
         return redirect(url_for('userlogin'))
     return render_template('usersignup.html', title='New User Sign Up', form=form)
 
 # User list of available jobs page
 @app.route('/apply_for_jobs')
-@login_required
+#@login_required
 def apply_for_jobs():
     data = mongo.db.Matchmaker.companydashb.find()
     job = []
@@ -92,7 +109,7 @@ def apply_for_jobs():
 
 # User dashboard route that allows User to upload CV
 @app.route('/userdashboard', methods=['POST', 'GET'])
-@login_required
+#@login_required
 def userdashboard():
     if request.method == "POST":
         file = request.files['file']
@@ -107,7 +124,7 @@ def userdashboard():
 
 # User dashboard form
 @app.route('/userdashboardform', methods=['POST', 'GET'])
-@login_required
+#@login_required
 def userdashboardform():
     if request.method == "POST":
         location = request.form.get('location')
@@ -147,13 +164,18 @@ def companylogin():
         return redirect(url_for('companydashboard'))
     form = Companyloginform()
     if form.validate_on_submit():
-        company = mongo.db.Matchmaker.companies.find_one({'email': form.email.data})
-        if company and form.password.data == company['password']:
+        company_db = mongo.db.Matchmaker.companies.find_one({'email': form.email.data})
+        company = Company(company_db)
+        if company and form.password.data == company.password:
             login_user(company)
             return redirect(url_for('companydashboard'))
+        
         else:
             flash('Login unsuccessful', category='danger')
     return render_template('companylogin.html', title='Company Login', form=form)
+
+def generate_company_id():
+    return str(uuid.uuid4())
 
 # Company signup route
 @app.route('/companysignup', methods=['POST', 'GET'])
@@ -161,18 +183,23 @@ def companysignup():
     form = Companysignupform()
     if form.validate_on_submit():
         company = {
+            '_id': generate_company_id(),
             'name': form.name.data,
             'email': form.email.data,
-            'password': form.password.data
+            'password': form.password.data,
+            #'datetime': "2023-06-30",
         }
-        mongo.db.Matchmaker.companies.insert_one(company)
+
+        company_details = Company(company)
+        
+        mongo.db.Matchmaker.companies.insert_one(company_details.__dict__)
         flash('Account created successfully. Please Login', category='success')
         return redirect(url_for('companylogin'))
     return render_template('companysignup.html', title='New Company Sign Up', form=form)
 
 # Company dashboard route
 @app.route('/companydashboard', methods=['POST', 'GET'])
-@login_required
+#@login_required
 def companydashboard():
     if request.method == 'POST':
         compname = request.form.get('compname')

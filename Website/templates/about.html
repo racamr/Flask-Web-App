@@ -33,3 +33,278 @@
   </body>
 </html>
 {%endblock content%}
+
+<!-- 
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Electronic Health Record</title>
+    <link rel="stylesheet" href="../subpages/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css"
+    />
+  </head>
+  <body>
+    <section class="sub-headercontact">
+      <nav>
+        <a href="index.html"
+          ><img
+            src="https://cdn.glitch.global/ee23b1d8-fb50-4b0a-a682-60f10491c7e0/Logo.JPG?1643290077140"
+        /></a>
+        <div class="nav-links" id="navlinks">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-x-square"
+            viewBox="0 0 16 16"
+            onclick="hidem()"
+          >
+            <path
+              d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"
+            />
+            <path
+              d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+            />
+          </svg>
+
+          <ul>
+            <li><a href="../index.html">HOME</a></li>
+            <li><a href="/subpages/about.html">ABOUT</a></li>
+            <li><a href="/subpages/login.html">LOGIN</a></li>
+            <li><a href="/subpages/register.html">REGISTER</a></li>
+            <li><a href="">CONTACT</a></li>
+          </ul>
+        </div>
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-list"
+          viewBox="0 0 16 16"
+          onclick="showm()"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+          />
+        </svg>
+      </nav>
+
+      
+      <!-- <h1>Contact</h1>
+    </section>
+
+    <section>
+      <div class="contact-us">
+        <h1>How can you contact us?</h1>
+        <br />
+        <p>
+          You can send us a mail with the address mentioned below or leave a
+          message for us.
+        </p>
+      </div>
+      <div class="location">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d165835.65359112323!2d8.361649211550034!3d49.49995531693052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4797cc24518e3f45%3A0xb1e4fe7aa406e687!2sMannheim!5e0!3m2!1sen!2sde!4v1643366266563!5m2!1sen!2sde"
+          width="600"
+          height="450"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+        ></iframe>
+      </div>
+    </section>
+
+    <section class="contact-us">
+      <div class="row">
+        <div class="contact-col">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-house-door-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"
+            />
+          </svg>
+          <span>
+            <h5>ABC Strasse, XYZ Building</h5>
+            <p>Mannheim, Kunsthalle, DE</p>
+          </span>
+        </div>
+
+        <div class="contact-col">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-telephone-inbound-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zM15.854.146a.5.5 0 0 1 0 .708L11.707 5H14.5a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 1 0v2.793L15.146.146a.5.5 0 0 1 .708 0z"
+            />
+          </svg>
+          <span>
+            <h5>+49(0)123456789</h5>
+            <p>Monday-Friday, 8AM to 5PM</p>
+          </span>
+        </div>
+
+        <div class="message-box">
+          <h3>Leave a message</h3>
+          <form class="message-form">
+            <input type="text" placeholder="Enter Name" />
+            <input type="email" placeholder="Enter Email" />
+            <textarea row="5" placeholder="Your message"></textarea>
+            <button type="submit" class="buttonmessage buttonappear">
+              SEND MESSAGE
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+    </body>
+</html>  -->
+
+
+
+
+
+
+
+
+<!-- *{
+	margin: 0;
+	padding: 0;
+  font-family: 'Work Sans', sans-serif;
+  
+}
+.header{
+	min-height: 100vh;
+	width: 100%;
+	background-image: linear-gradient(rgba(89,103,160,0.7),rgba(4,9,30,0.7)), url(https://images.unsplash.com/photo-1599045118108-bf9954418b76?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80);
+	background-position: center;
+	background-size: cover;
+	position: relative;
+}
+nav{
+  display: flex;
+  padding: 3% 4%;
+  justify-content: space-between;
+  align-items: center;
+}
+nav img{
+  width: 120px;
+}
+.nav-links{
+  flex: 1;
+  text-align: right;
+}
+.nav-links ul li{
+  list-style: none;
+  display: inline-block;
+  padding: 10px 20px;
+  position: relative;
+}
+.nav-links ul li a{
+  color: rgb(255,255,255);
+  text-decoration: none;
+  font-size: 13px;
+}
+.nav-links ul li::after{
+  content:'';
+  width: 0%;
+  height: 2px;
+  background: rgb(248,5,5);
+  display: block;
+  margin: auto;
+  transition: 0.3s;
+}
+.nav-links ul li:hover::after{
+  width: 100%;
+}
+.text-box{
+  width: 90%;
+  color: rgb(255,255,255);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+}
+.text-box h1{
+  font-size: 62px;
+}
+.text-box p{
+  margin: 10px 0 40px;
+  font-size: 14px;
+  color: rgb(255,255,255);
+}
+.button{
+  display: inline-block;
+  text-decoration: none;
+  color: rgb(255,255,255);
+  border: 1px solid rgb(255,255,255);
+  padding: 12px 34px;
+  font-size: 13px;
+  background: transparent;
+  position: relative;
+  cursor: pointer;
+}
+.button:hover{
+  border: 1px solid rgb(248,5,5);
+  background: rgb(248,5,5);
+  transition: 1s;
+}
+
+nav .bi{
+  display: none;
+}
+
+@media(max-width: 700px){
+  .text-box h1{
+    font-size: 20px;
+  }
+  .nav-links ul li{
+    display: block;
+  }
+  .nav-links{
+    position: absolute;
+    background: rgb(248,5,5);
+    height: 100vh;
+    width: 200px;
+    top: 0;
+    right: -200px; 
+    text-align: left;
+    z-index: 2;
+    transition: 1s;
+  }
+  nav .bi{
+    display: block;
+    color: rgb(255,255,255);
+    margin: 10px;
+    font-size: 22px;
+    cursor: pointer;      
+  }
+  .nav-links ul{
+    padding: 30px;
+  }
+} -->

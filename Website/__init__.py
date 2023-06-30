@@ -3,7 +3,9 @@ from flask_login import LoginManager
 from flask_pymongo import PyMongo
 import secrets
 
-app = Flask(__name__)
+app = Flask(__name__) 
+
+app.debug= True
 
 app.config['SECRET_KEY'] = secrets.token_hex(16)
 
@@ -15,3 +17,4 @@ mongo = PyMongo(app)
 # Flask Login Manager
 login_manager = LoginManager(app)
 login_manager.init_app(app)
+login_manager.login_view = 'userlogin'
