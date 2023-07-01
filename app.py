@@ -24,7 +24,7 @@ def about():
 # Jobs page in homepage
 @app.route('/jobs')
 def jobs():
-    data = mongo.db.Matchmaker.Companydashb.find()
+    data = mongo.db.Matchmaker.companydashb.find()
     job = []
     for item in data:
         item_dict = {
