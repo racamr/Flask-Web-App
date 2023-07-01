@@ -13,13 +13,10 @@
         <div class="container-fluid">
           <a class="navbar-brand"><strong>MatchMakerAbroad</strong></a>
           
-          {%if current_user.is_authenticated%}
           <div>
-          <a class="btn btn-outline-danger" href={{url_for('logout')}} type="submit">Logout</a>
+            <a class="btn btn-outline-danger" href={{url_for('logout')}} type="submit">Logout</a>
           </div>
           
-          {%endif %}
-        
         </div>
       </nav>
   </head>

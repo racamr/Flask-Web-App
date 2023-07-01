@@ -13,12 +13,12 @@
       <div class="container-fluid">
         <a class="navbar-brand"><strong>MatchMakerAbroad</strong></a>
         
-        {%if current_user.is_authenticated%}
+        
         <div>
           <a class="nav-link" href={{url_for('logout')}} style="color:red; background:white; border-style: solid; border-width: thin; border-radius: 5px">Logout </a>
         </div>
         
-        {% endif%}
+        
       </div>
     </nav>
   </head>
