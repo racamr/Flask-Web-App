@@ -35,27 +35,23 @@
     
   </head>
   <body> 
-
-  <div class="container">
-      {% with messages = get_flashed_messages()%}
-            {% if messages%}
-              <div class="alert alert-primary d-flex align-items-center" role="alert" >
-                <div class="flex-grow-1">
-                {% for message in messages %}
-                {{ message}}
-                {% endfor%} </div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-            {% endif%}
-        {% endwith%}
-  </div>
-    
-    
     <div class="container">
-      <h2>Company Dashboard</h2><br>
-      <h3>Find your Perfect Partner</h3>
-    </div>
-
+        <h2 class="dashboard-heading">Company Dashboard</h2>
+        <br>
+        <h3 class="sub-heading">Find your Perfect Partner</h3>
+        <div class="container-fluid">
+          {% with messages = get_flashed_messages()%}
+                {% if messages%}
+                  <div class="alert alert-primary d-flex align-items-center" role="alert" >
+                    <div class="flex-grow-1">
+                    {% for message in messages %}
+                    {{ message}}
+                    {% endfor%} </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endif%}
+            {% endwith%}
+      </div>
 
     <div class="container mt-4" style="width: 700px">
       <form method="POST" action="/companydashboard" >
@@ -158,6 +154,51 @@
       </form>
     
     </div> 
+
+  </div>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+    }
+  
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+  
+    .dashboard-heading {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+  
+    .sub-heading {
+      text-align: center;
+      color: #666;
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 3px;
+      transition: background-color 0.3s ease;
+    }
+  
+    .btn-primary {
+      background-color: #337ab7;
+      color: #fff;
+      text-decoration: none;
+    }
+  
+    .btn-primary:hover {
+      background-color: #23527c;
+    }
+  
+  </style>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

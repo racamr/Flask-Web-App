@@ -34,14 +34,14 @@
             </div>
     
             <div class="form-group mb-3">
-                {{form.password.label(class="form-control-label")}}
+                {{form.password.label(class="form-control-label" )}}
                 {%if form.password.errors%}
                 {{form.password(class="form-control form-control-lg-invalid")}}
                 {%for error in form.password.errors%}co
                 <span>{{error}}</span>
                 {%endfor%}
                 {%else%}
-                {{form.password(class="form-control form-control-lg")}}
+                {{form.password(class="form-control form-control-lg", placeholder="Password must be at least 6 characters")}}
                 {%endif%}
                 
             </div>

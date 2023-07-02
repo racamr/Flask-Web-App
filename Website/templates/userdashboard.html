@@ -26,10 +26,10 @@
       <a class="btn btn-outline-primary" href={{url_for('apply_for_jobs')}} type="submit">Back</a>
     </div>
     
-  <div class="container">
-    <h2>User Dashboard</h2><br>
-    <h3>Find your Perfect Partner</h3>
-      
+    <div class="container">
+      <h2 class="dashboard-heading">User Dashboard</h2>
+      <br>
+      <h3 class="sub-heading">Find your Perfect Partner</h3>
       <div class="container">
         {% with messages = get_flashed_messages()%}
               {% if messages%}
@@ -43,32 +43,91 @@
               {% endif%}
             {% endwith%}
     </div>
-      
-
-     <div class="container" style="width: 600px">
-    <div class="form" style='margin-top: 40px'>
-    <form method="POST" action="/userdashboard" enctype="multipart/form-data">
-      <h5>Upload CV</h5>
-      <input type="file" name="file">
-      <button class="btn btn-secondary">Upload</button>
-    </form>
-
-
-    <div class="container mt-4">
-      <div class="row">
-        <div class="col-sm">
-          
+      <div class="dashboard-container">
+        <div class="form-container">
+          <form method="POST" action="/userdashboard" enctype="multipart/form-data">
+            <h5 class="form-heading">Upload CV</h5>
+            <div class="form-group">
+              <input type="file" name="file" class="form-control-file">
+            </div>
+            <button class="btn btn-secondary upload-button">Upload</button>
+          </form>
         </div>
-        <div class="col-sm">
-          
-        </div>
-        <div class="col-sm">
-          <a href="userdashboardform" class="btn btn-primary" role="button">Next</a>
+    
+        <div class="navigation-container mt-4">
+          <div class="row">
+            <div class="col-sm">
+              
+            </div>
+            <div class="col-sm">
+              
+            </div>
+            <div class="col-sm">
+              <a href="userdashboardform" class="btn btn-primary next-button" role="button">Next</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-     <div class="btn mt-4">
-  </div>
+    
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+      }
+    
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+    
+      .dashboard-heading {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+      }
+    
+      .sub-heading {
+        text-align: center;
+        color: #666;
+        margin-bottom: 40px;
+      }
+    
+      .dashboard-container {
+        width: 600px;
+        margin: 0 auto;
+      }
+    
+      .form-container {
+        margin-top: 40px;
+      }
+    
+      .form-heading {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 10px;
+      }
+    
+      .form-group {
+        margin-bottom: 20px;
+      }
+    
+      .upload-button {
+        display: block;
+        width: 100%;
+      }
+    
+      .navigation-container {
+        margin-top: 40px;
+      }
+    
+      .next-button {
+        display: block;
+        width: 100%;
+      }
+    </style>
+    
 
 
 

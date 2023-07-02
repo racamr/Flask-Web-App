@@ -100,7 +100,7 @@ def apply_for_jobs():
             'compname': item['compname'],
             'location': item['location'],
             'sector': item['sector'],
-            'period': item['service_period'],
+            'service_period': item['service_period'],
             'category': item['category'],
             'job_description': item['job_description']
         }

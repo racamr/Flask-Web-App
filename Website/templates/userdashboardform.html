@@ -46,17 +46,9 @@
   </div>
     
     <div class="container">
-      <h2>User Dashboard</h2><br>
-      <h3>Find your Perfect Partner</h3>
-      <!--
-      <h5>
-      {%if current_user.is_authenticated%}
-      Hello, {{current_user.name}}
-      {%endif%}
-      </h5>
-    </div>
-
-  --> 
+      <h2 class="dashboard-heading">User Dashboard</h2>
+      <br>
+      <h3 class="sub-heading">Find your Perfect Partner</h3>
 
  
 <div class="container mt-4" style="width: 700px">
@@ -140,7 +132,31 @@
 
 </div> 
   
-    
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .dashboard-heading {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .sub-heading {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+  }
+
+</style>
 
 
     <!-- Optional JavaScript; choose one of the two! -->

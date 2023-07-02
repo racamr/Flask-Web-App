@@ -30,33 +30,99 @@
     </div>
     
     <div class="container">
-        <div class="text-center my-3"><h4>Available Positions</h4></div>
-        {% for item in data%}
-        {% if item.location%}
-        <div class="row" style="border: 1px solid lightgray; padding:20px;  margin-bottom: 20px">
-            <div class="col-9">
-            <h5>Vacancy available at</h5>{{item['compname']}}
-            
-            <h5>Location </h5>{{item['location']}}
-            
-            <h5>Sector </h5>{{item['sector']}}
-            
-            <h5>Duration of the job</h5> {{item['service_period']}}
-            
-            <h5>Category </h5> {{item['category']}} 
-            
-            <h5>Job Description</h5> {{item['job_description']}}
-            
-            </div> 
-
-            <div class="col-3 align-self-center">
-              <a href="userdashboard" class="btn btn-outline-primary" role="button">Apply</a>
-             </div>
-        </div>
+      <div class="text-center my-4">
+        <h4>Available Positions</h4>
+      </div>
+      {% for item in data %}
+        {% if item.location %}
+          <div class="row job-card">
+            <div class="col-lg-9">
+              <h5 class="company-name">{{ item['compname'] }}</h5>
+              <div class="job-details">
+                <p><strong>Location:</strong> {{ item['location'] }}</p>
+                <p><strong>Sector:</strong> {{ item['sector'] }}</p>
+                <p><strong>Duration of the job:</strong> {{ item['service_period'] }}</p>
+                <p><strong>Category:</strong> {{ item['category'] }}</p>
+                <p><strong>Job Description:</strong> {{ item['job_description'] }}</p>
+              </div>
+            </div>
+            <div class="col-lg-3 align-self-center">
+              <a href="userdashboard" class="btn btn-primary apply-button">Apply</a>
+            </div>
+          </div>
            
          {% endif%}
          
         {% endfor%}
+
+
+        <style>
+            body {
+              font-family: Arial, sans-serif;
+              background-color: #f7f7f7;
+            }
+          
+            .container {
+              max-width: 900px;
+              margin: 0 auto;
+              padding: 20px;
+            }
+          
+            .text-center {
+              text-align: center;
+            }
+
+            .my-4 {
+                margin-top: 40px;
+                margin-bottom: 40px;
+              }
+            
+              .job-card {
+                border: 1px solid lightgray;
+                padding: 20px;
+                margin-bottom: 20px;
+                background-color: #fff;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                border-radius: 5px;
+              }
+            
+              .company-name {
+                font-size: 20px;
+                color: #333;
+                margin-bottom: 10px;
+              }
+            
+              .job-details {
+                margin-bottom: 15px;
+              }
+            
+              .job-details p {
+                color: #666;
+                margin: 5px 0;
+              }
+            
+              .align-self-center {
+                align-self: center;
+              }
+            
+              .btn {
+                display: inline-block;
+                padding: 10px 20px;
+                border-radius: 3px;
+                transition: background-color 0.3s ease;
+              }
+            
+              .btn-primary {
+                background-color: #337ab7;
+                color: #fff;
+                text-decoration: none;
+              }
+            
+              .btn-primary:hover {
+                background-color: #23527c;
+              }
+            </style>
+                   
         
     </div>
     
