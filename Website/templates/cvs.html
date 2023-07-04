@@ -20,15 +20,16 @@
 
             <a class="nav-link" href="/companydashboard">Dashboard</a>
             <a class="nav-link" href="#">CVs</a>
+            <a class="nav-link" href="#">My Job Posts</a>
           </div>
 
         </div>
-        {%if current_user.is_authenticated%}
+      
           <div>
           <a class="btn btn-outline-danger" href={{url_for('logout')}} type="submit">Logout</a>
           </div>
           
-          {%endif %}
+          
         
         </div>
       </div>
@@ -37,17 +38,26 @@
   </head>
   <body> 
     
-    
-    <div class="container">
-      <h1>Company Dashboard</h1>
-    </div>
 
-    <div>
-        <h2> {{cv.filename}} </h2>
-        <a href=> </a>
+<div class="container">
+    <div class="cv mt-2">
+      <table style="width:100%">
+        <tr>
+          <th>ID</th>
+          <th>File Name</th>
+          <th>Download link</th>
+        </tr>
+    {% for item in file_data %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td> {{ item['filename'] }}</td>
+          <td><a class="nav-link" href="/download/{{item['id']}}">Download</a></td>
+      </tr>
+        {% endfor%}
+      </table>
     </div>
     
-   
+  </div>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
