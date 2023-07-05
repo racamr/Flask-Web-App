@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, redirect, url_for, request, send_file,send_from_directory
+from flask import Flask, render_template, flash, redirect, url_for, request, send_file,send_from_directory,session
 from flask_pymongo import ObjectId
 from flask_login import login_user, logout_user, current_user, login_required
 from io import BytesIO
@@ -10,11 +10,11 @@ import random
 import stripe
 import uuid
 from werkzeug.utils import secure_filename
+from flask_session import Session
+app.secret_key = 'super secret key'
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
 
-
-@app.route("/test")
-def test():
-    return render_template('test.html', title='Home')
 
 # Homepage
 @app.route("/")
@@ -22,10 +22,10 @@ def test():
 def home():
     return render_template('home.html', title='Home')
 
-# About
-@app.route("/about")
-def about():
-    return render_template('about.html', title='About Us')
+# Contact
+@app.route("/contact")
+def contact():
+    return render_template('contact.html', title='Contact Us')
 
 # Jobs page in homepage
 @app.route('/jobs')
@@ -51,7 +51,6 @@ base_dir = app.root_path
 # Create the uploads directory path relative to the base directory
 document_directory = os.path.join(base_dir, 'uploads')
 
-
 # User login route
 @app.route('/userlogin', methods=['POST', 'GET'])
 def userlogin():
@@ -65,10 +64,10 @@ def userlogin():
         else:
             user = User(user_db)
             if user and form.password.data == user.password:
+                session['user_object'] = user
                 login_user(user)
-
                 return redirect(url_for('apply_for_jobs'))
-
+                #return redirect(url_for('userdashboardform'))
             else:
                 flash('Login unsuccessful', category='danger')
     return render_template('userlogin.html', title='User Login', form=form)
@@ -90,9 +89,7 @@ def usersignup():
             'datetime': "2023-06-30",
          #   'is_active': True
         }
-    
         user_details = User(user)
-
         #mongo.db.User.insert_one({"name":user_details.name, "email":user_details.email, "password": user_details.password, "datetime":user_details.datetime, "is_active":user_details.is_active})
         mongo.db.User.insert_one(user_details.__dict__)
         flash('Account created successfully. Please Login', category='success')
@@ -106,32 +103,42 @@ def apply_for_jobs():
     data = mongo.db.Matchmaker.companydashb.find()
     job = []
     for item in data:
+        id = item.get('_id')
         item_dict = {
             'compname': item['compname'],
             'location': item['location'],
             'sector': item['sector'],
             'service_period': item['service_period'],
             'category': item['category'],
-            'job_description': item['job_description']
+            'job_description': item['job_description'],
+            'id':id
         }
         job.append(item_dict)
     return render_template('apply_for_jobs.html', title='Available Jobs', data=job)
 
+@app.route('/get_company/<name>',methods=['GET', 'POST'])
+def get_company(name):
+    session['company_name'] = name
+    return redirect(url_for('userdashboard'))
 # User dashboard route that allows User to upload CV
 @app.route('/userdashboard', methods=['POST', 'GET'])
 #@login_required
 def userdashboard():
     if request.method == "POST":
+        ses_user_object = session['user_object']
+        se_com_obj = session['company_object']
+        sec_company_name = session['company_name']
         file = request.files['file']
         filename = file.filename
-
         if filename == '':
             flash('CV uploaded unsuccessfully', category='danger')
         else:
             file.save(os.path.join(document_directory, filename))
             upload = {
                 'filename': file.filename,
-                'data': file.read()
+                'data': file.read(),
+                'company_name' : sec_company_name,
+                'user_id' : ses_user_object.id
             }
             mongo.db.Matchmaker.uploads.insert_one(upload)
             flash('CV uploaded successfully', category='success')
@@ -166,21 +173,58 @@ def download(_id):
     return send_from_directory(full_path, cvs['filename'])
 
 
-# Route to download CV
+# Route to show CV
 @app.route('/cvs')
 def show_uploaded_cv():
-    data = mongo.db.Matchmaker.uploads.find()
-    file_data= []
-    for item in data:
-        file_dict = {
-            'filename': item['filename'],
-            'filepath': os.path.join(document_directory, item['filename']),
-            'id': item['_id']
-        }
-        file_data.append(file_dict)
+    ses_user_object = session['user_object']
+    se_com_obj = session['company_object']
+    file_data = []
+    if se_com_obj:
+        company_name = se_com_obj.name
+        data = mongo.db.Matchmaker.uploads.find({'company_name': str(company_name)})
+        for item in data:
+            file_dict = {
+                'filename': item['filename'],
+                'filepath': os.path.join(document_directory, item['filename']),
+                'id': item['_id']
+            }
+            file_data.append(file_dict)
     return render_template('cvs.html', title='Company Dashboard', file_data=file_data)
-
-
+'''
+@app.route('/cvs')
+def show_uploaded_cv():
+    ses_user_object = session.get('user_object')
+    se_com_obj = session.get('company_object')
+    file_data = []
+    if se_com_obj:
+        company_name = se_com_obj.name
+        data = mongo.db.Matchmaker.uploads.find({'company_name': str(company_name)})
+        for item in data:
+            file_dict = {
+                'filename': item['filename'],
+                'filepath': os.path.join(document_directory, item['filename']),
+                'id': item['_id']
+            }
+            file_data.append(file_dict)
+    return render_template('cvs.html', title='Company Dashboard', file_data=file_data)
+'''
+@app.route('/user_cvs')
+def show_user_uploaded_cv():
+    ses_user_object = session['user_object']
+    se_com_obj = session['company_object']
+    #sec_company_id = session['company_id']
+    file_data = []
+    if ses_user_object:
+        user_id = ses_user_object.id
+        data = mongo.db.Matchmaker.uploads.find({'user_id': str(user_id)})
+        for item in data:
+            file_dict = {
+                'filename': item['filename'],
+                'filepath': os.path.join(document_directory, item['filename']),
+                'id': item['_id']
+            }
+            file_data.append(file_dict)
+    return render_template('user_cvs.html', title='User Dashboard', file_data=file_data)
 # Company login route
 @app.route('/companylogin', methods=['POST', 'GET'])
 def companylogin():
@@ -189,11 +233,12 @@ def companylogin():
     form = Companyloginform()
     if form.validate_on_submit():
         company_db = mongo.db.Matchmaker.companies.find_one({'email': form.email.data})
-        company = Company(company_db)
-        if company is None:
+        if company_db is None:
             flash('Login unsuccessful', category='danger')
         else:
+            company = Company(company_db)
             if company and form.password.data == company.password:
+                session['company_object'] = company
                 login_user(company)
                 return redirect(url_for('companydashboard'))
 
@@ -413,6 +458,9 @@ def get_chatbot_response(user_message):
 # Logout route
 @app.route('/logout')
 def logout():
+    session["user_object"] = None
+    session["company_object"] = None
+    session['company_name']  = None
     logout_user()
     return redirect(url_for('home'))
 

@@ -7,3 +7,4 @@ postgres
 pymongo
 flask_pymongo
 stripe
+flask-session

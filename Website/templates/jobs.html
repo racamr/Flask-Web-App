@@ -5,7 +5,7 @@
     <div class="text-center my-4">
       <h4>Available Positions</h4>
     </div>
-
+    
     <div class="text-center" style="margin-bottom: 20px;">
       <form id="search-form" class="search-form" style="display: inline-flex;">
         <input type="text" id="search-input" class="form-control form-control-sm mr-2" placeholder="Search..." style="width: 300px; border-radius: 20px;">
@@ -13,7 +13,7 @@
     </div>
     
     <div id="job-results">
-    {% for item in data %}
+      {% for item in data %}
       {% if item.location %}
         <div class="row job-card">
           <div class="col-lg-9">
@@ -32,89 +32,32 @@
         </div>
            
          {% endif%}
-         
-        {% endfor%}
-      </div>
-      
-      <div id="no-results-message" style="display: none; text-align: center; font-size: 18px; color: #777; padding: 10px; background-color: #f8f8f8; border-radius: 5px;">
-        Sorry! No results available.
-      </div>
-      
-      
-        <style>
-            body {
-              font-family: Arial, sans-serif;
-              background-color: #f7f7f7;
-            }
-          
-            .container {
-              max-width: 900px;
-              margin: 0 auto;
-              padding: 20px;
-            }
-          
-            .text-center {
-              text-align: center;
-            }
 
-            .my-4 {
-                margin-top: 40px;
-                margin-bottom: 40px;
-              }
-            
-              .job-card {
-                border: 1px solid lightgray;
-                padding: 20px;
-                margin-bottom: 20px;
-                background-color: #fff;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                border-radius: 5px;
-              }
-            
-              .company-name {
-                font-size: 20px;
-                color: #333;
-                margin-bottom: 10px;
-              }
-            
-              .job-details {
-                margin-bottom: 15px;
-              }
-            
-              .job-details p {
-                color: #666;
-                margin: 5px 0;
-              }
-            
-              .align-self-center {
-                align-self: center;
-              }
-            
-              .btn {
-                display: inline-block;
-                padding: 10px 20px;
-                border-radius: 3px;
-                transition: background-color 0.3s ease;
-              }
-            
-              .btn-primary {
-                background-color: #337ab7;
-                color: #fff;
-                text-decoration: none;
-              }
-            
-              .btn-primary:hover {
-                background-color: #23527c;
-              }
-            </style>
-                   
+         {% endfor%}
+        </div>
+      
+        <div id="no-results-message" style="display: none; text-align: center; font-size: 18px; color: #777; padding: 10px; background-color: #f8f8f8; border-radius: 5px;">
+          Sorry! No results available.
+        </div>
+    </div>                 
 
-    </div>
+    
     <div class="class mt-2"></div>
         
     <!--Custom JS=> main.js-->
     <script src="{{url_for('static', filename='main.js')}}"></script>
-  
-
+    <div class="chat-container">
+      <div class="chat-header">
+          Need Help?
+      </div>
+      <div class="chat-body">
+          <div id="chat-log"></div>
+          <form>
+              <input type="text" id="user-message" placeholder="Enter your message" autocomplete="off">
+              <input type="submit" value="Send" class="send-button">
+          </form>
+      </div>
+    </div>
+    
 
 {%endblock content%}
