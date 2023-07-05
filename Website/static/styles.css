@@ -61,3 +61,68 @@
     background-color: cadetblue;
     color: white;
   }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .my-4 {
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+  
+    .job-card {
+      border: 1px solid lightgray;
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+  
+    .company-name {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+  
+    .job-details {
+      margin-bottom: 15px;
+    }
+  
+    .job-details p {
+      color: #666;
+      margin: 5px 0;
+    }
+  
+    .align-self-center {
+      align-self: center;
+    }
+  
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 3px;
+      transition: background-color 0.3s ease;
+    }
+  
+    .btn-primary {
+      background-color: #337ab7;
+      color: #fff;
+      text-decoration: none;
+    }
+  
+    .btn-primary:hover {
+      background-color: #23527c;
+    }
