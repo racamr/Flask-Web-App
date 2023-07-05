@@ -48,3 +48,47 @@ $(document).ready(function() {
         chatBody.scrollTop(chatBody[0].scrollHeight);
     }
 });
+
+
+
+// main.js
+
+
+// main.js
+
+    function performSearch(searchText) {
+      var jobCards = document.getElementsByClassName("job-card");
+      var noResultsMessage = document.getElementById("no-results-message");
+      var hasResults = false;
+
+      for (var i = 0; i < jobCards.length; i++) {
+        var jobCard = jobCards[i];
+        var companyName = jobCard.getElementsByClassName("company-name")[0].textContent.toLowerCase();
+        var location = jobCard.getElementsByClassName("job-details")[0].textContent.toLowerCase();
+
+        if (searchText === "" || companyName.includes(searchText) || location.includes(searchText)) {
+          jobCard.style.display = "block";
+          hasResults = true;
+        } else {
+          jobCard.style.display = "none";
+        }
+      }
+
+      if (hasResults) {
+        noResultsMessage.style.display = "none";
+      } else {
+        noResultsMessage.style.display = "block";
+      }
+    }
+
+    document.getElementById("search-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      var searchText = document.getElementById("search-input").value.trim().toLowerCase();
+      performSearch(searchText);
+    });
+
+    document.getElementById("search-input").addEventListener("input", function(event) {
+      var searchText = event.target.value.trim().toLowerCase();
+      performSearch(searchText);
+    });
+  

@@ -1,144 +1,184 @@
-
-{%block content%}
+{% block content %}
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>Available Jobs</title>
-    <nav class="navbar bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand">MatchMakerAbroad</a>
-          
-          <div>
-            <a class="btn btn-outline-danger" href={{url_for('logout')}} type="submit">Logout</a>
-          </div>
-        
-        </div>
-    </nav>
-  </head>
-  <body> 
+  <title>Available Jobs</title>
+  <nav class="navbar bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand">MatchMakerAbroad</a>
 
-    <div style="float:right">
-      <a class="btn btn-outline-primary" href={{url_for('userdashboard')}} type="submit">Skip</a>
-    </div>
-    
-    <div class="container">
-      <div class="text-center my-4">
-        <h4>Available Positions</h4>
+      <div>
+        <a class="btn btn-outline-danger" href="{{ url_for('logout') }}" type="submit">Logout</a>
       </div>
-      {% for item in data %}
-        {% if item.location %}
-          <div class="row job-card">
-            <div class="col-lg-9">
-              <h5 class="company-name">{{ item['compname'] }}</h5>
-              <div class="job-details">
-                <p><strong>Location:</strong> {{ item['location'] }}</p>
-                <p><strong>Sector:</strong> {{ item['sector'] }}</p>
-                <p><strong>Duration of the job:</strong> {{ item['service_period'] }}</p>
-                <p><strong>Category:</strong> {{ item['category'] }}</p>
-                <p><strong>Job Description:</strong> {{ item['job_description'] }}</p>
-              </div>
-            </div>
-            <div class="col-lg-3 align-self-center">
-              <a href="userdashboard" class="btn btn-primary apply-button">Apply</a>
-            </div>
-          </div>
-           
-         {% endif%}
-         
-        {% endfor%}
 
-
-        <style>
-            body {
-              font-family: Arial, sans-serif;
-              background-color: #f7f7f7;
-            }
-          
-            .container {
-              max-width: 900px;
-              margin: 0 auto;
-              padding: 20px;
-            }
-          
-            .text-center {
-              text-align: center;
-            }
-
-            .my-4 {
-                margin-top: 40px;
-                margin-bottom: 40px;
-              }
-            
-              .job-card {
-                border: 1px solid lightgray;
-                padding: 20px;
-                margin-bottom: 20px;
-                background-color: #fff;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                border-radius: 5px;
-              }
-            
-              .company-name {
-                font-size: 20px;
-                color: #333;
-                margin-bottom: 10px;
-              }
-            
-              .job-details {
-                margin-bottom: 15px;
-              }
-            
-              .job-details p {
-                color: #666;
-                margin: 5px 0;
-              }
-            
-              .align-self-center {
-                align-self: center;
-              }
-            
-              .btn {
-                display: inline-block;
-                padding: 10px 20px;
-                border-radius: 3px;
-                transition: background-color 0.3s ease;
-              }
-            
-              .btn-primary {
-                background-color: #337ab7;
-                color: #fff;
-                text-decoration: none;
-              }
-            
-              .btn-primary:hover {
-                background-color: #23527c;
-              }
-            </style>
-                   
-        
     </div>
-    
+  </nav>
+</head>
+<body>
 
+<div style="float:right">
+  <a class="btn btn-outline-primary" href="{{ url_for('userdashboard') }}" type="submit">Skip</a>
+</div>
 
-  
-    
+<div class="container">
+  <div class="text-center my-4">
+    <h4>Available Positions</h4>
+  </div>
 
+  <div class="text-center" style="margin-bottom: 20px;">
+    <form id="search-form" class="search-form" style="display: inline-flex;">
+      <input type="text" id="search-input" class="form-control form-control-sm mr-2" placeholder="Search..." style="width: 300px; border-radius: 20px;">
+    </form>
+  </div>
 
-    <!-- Optional JavaScript; choose one of the two! -->
+  <div id="job-results">
+    {% for item in data %}
+    {% if item.location %}
+    <div class="row job-card">
+      <div class="col-lg-9">
+        <h5 class="company-name">{{ item['compname'] }}</h5>
+        <div class="job-details">
+          <p><strong>Location:</strong> {{ item['location'] }}</p>
+          <p><strong>Sector:</strong> {{ item['sector'] }}</p>
+          <p><strong>Duration of the job:</strong> {{ item['service_period'] }}</p>
+          <p><strong>Category:</strong> {{ item['category'] }}</p>
+          <p><strong>Job Description:</strong> {{ item['job_description'] }}</p>
+        </div>
+      </div>
+      <div class="col-lg-3 align-self-center">
+        <a href="userdashboard" class="btn btn-primary apply-button">Apply</a>
+      </div>
+    </div>
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    {% endif %}
+    {% endfor %}
+  </div>
 
-    
-  </body>
+  <div id="no-results-message" style="display: none; text-align: center;">
+    Sorry! Not available.
+  </div>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .my-4 {
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    .job-card {
+      border: 1px solid lightgray;
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    .company-name {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .job-details {
+      margin-bottom: 15px;
+    }
+
+    .job-details p {
+      color: #666;
+      margin: 5px 0;
+    }
+
+    .align-self-center {
+      align-self: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 3px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: #337ab7;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #23527c;
+    }
+  </style>
+
+  <script>
+    function performSearch(searchText) {
+      var jobCards = document.getElementsByClassName("job-card");
+      var noResultsMessage = document.getElementById("no-results-message");
+      var hasResults = false;
+
+      for (var i = 0; i < jobCards.length; i++) {
+        var jobCard = jobCards[i];
+        var companyName = jobCard.getElementsByClassName("company-name")[0].textContent.toLowerCase();
+        var location = jobCard.getElementsByClassName("job-details")[0].textContent.toLowerCase();
+
+        if (searchText === "" || companyName.includes(searchText) || location.includes(searchText)) {
+          jobCard.style.display = "block";
+          hasResults = true;
+        } else {
+          jobCard.style.display = "none";
+        }
+      }
+
+      if (hasResults) {
+        noResultsMessage.style.display = "none";
+      } else {
+        noResultsMessage.style.display = "block";
+      }
+    }
+
+    document.getElementById("search-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      var searchText = document.getElementById("search-input").value.trim().toLowerCase();
+      performSearch(searchText);
+    });
+
+    document.getElementById("search-input").addEventListener("input", function(event) {
+      var searchText = event.target.value.trim().toLowerCase();
+      performSearch(searchText);
+    });
+  </script>
+
+</div>
+
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</body>
 </html>
 
-{%endblock content%}
+{% endblock content %}

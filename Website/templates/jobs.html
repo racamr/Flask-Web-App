@@ -5,7 +5,14 @@
     <div class="text-center my-4">
       <h4>Available Positions</h4>
     </div>
+
+    <div class="text-center" style="margin-bottom: 20px;">
+      <form id="search-form" class="search-form" style="display: inline-flex;">
+        <input type="text" id="search-input" class="form-control form-control-sm mr-2" placeholder="Search..." style="width: 300px; border-radius: 20px;">
+      </form>
+    </div>
     
+    <div id="job-results">
     {% for item in data %}
       {% if item.location %}
         <div class="row job-card">
@@ -27,6 +34,13 @@
          {% endif%}
          
         {% endfor%}
+      </div>
+      
+      <div id="no-results-message" style="display: none; text-align: center; font-size: 18px; color: #777; padding: 10px; background-color: #f8f8f8; border-radius: 5px;">
+        Sorry! No results available.
+      </div>
+      
+      
         <style>
             body {
               font-family: Arial, sans-serif;
@@ -100,18 +114,7 @@
         
     <!--Custom JS=> main.js-->
     <script src="{{url_for('static', filename='main.js')}}"></script>
-    <div class="chat-container">
-      <div class="chat-header">
-          Need Help?
-      </div>
-      <div class="chat-body">
-          <div id="chat-log"></div>
-          <form>
-              <input type="text" id="user-message" placeholder="Enter your message" autocomplete="off">
-              <input type="submit" value="Send" class="send-button">
-          </form>
-      </div>
-    </div>
-    
+  
+
 
 {%endblock content%}
