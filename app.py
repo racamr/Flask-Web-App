@@ -128,10 +128,15 @@ def userdashboard():
         ses_user_object = session['user_object']
         se_com_obj = session['company_object']
         sec_company_name = session['company_name']
+        
+        if 'file' not in request.files:
+            flash('No file attached', category='danger')
+            return redirect(url_for('userdashboard'))
+        
         file = request.files['file']
         filename = file.filename
         if filename == '':
-            flash('CV uploaded unsuccessfully', category='danger')
+            flash('No file attached', category='danger')
         else:
             file.save(os.path.join(document_directory, filename))
             upload = {
